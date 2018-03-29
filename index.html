@@ -5,43 +5,50 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>jQuery UI Spinner - Default functionality</title>
   <style>
-    body {
-        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    }
 
-    .center {
-        margin: auto;
-        width: 50%;
-        padding: 10px;
-    }
+      body {
+          font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      }
 
-    button {
-      border: 0;
-      outline: 0;
-      display: inline-block;
-      background-color: #ddd;
-      border-radius: 3px;
-      padding: 12px 12px;
-    }
+      .center {
+          margin-left: auto;
+          margin-right: auto;
+          width: 90%;
+          padding: 10px;
+      }
 
-    .btn {
-      width: 45px;
-      height: 45px;
-    }
+      button {
+        border: 0;
+        outline: 0;
+        display: inline-block;
+        background-color: #ddd;
+        border-radius: 3px;
+        padding: 12px 12px;
+      }
 
-    .buttonLine {
-        padding: 3px 6px;
-    }
+      .btn {
+        width: 45px;
+        height: 45px;
+      }
 
-    .btn.active, .btn-type.active, .btn-withAdvantage.active {
-        background-color: #000;
-        color: #fff;
-    }
+      .buttonLine {
+          padding: 3px 6px;
+      }
 
-    .btn-roll:active, .btn-reset:active {
-        background-color: #000;
-        color: #fff;
-    }
+      .btn.active, .btn-type.active, .btn-withAdvantage.active {
+          background-color: #000;
+          color: #fff;
+      }
+
+      .btn-roll:active, .btn-reset:active {
+          background-color: #000;
+          color: #fff;
+      }
+
+      .withMeaning {
+          font-size: 125%;
+      }
+
   </style>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
   <script>
@@ -75,9 +82,9 @@
               if (withAdvantage) {
                   secondRoll = getRandomInt(1, dieType) + modifier;
                   if (secondRoll > firstRoll) {
-                    secondRoll = "<b>" + secondRoll + "</b>";
+                    secondRoll = "<b class='withMeaning'>" + secondRoll + "</b>";
                   } else  {
-                    firstRoll = "<b>" + firstRoll + "</b>";
+                    firstRoll = "<b class='withMeaning'>" + firstRoll + "</b>";
                   }
                   output = firstRoll + " : " + secondRoll;
               }
