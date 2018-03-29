@@ -8,7 +8,7 @@
 
       body {
           font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-          width: 250px;
+          width: 400px;
       }
 
       /* .center {
@@ -93,12 +93,20 @@
                     firstRoll = "<b class='withMeaning'>" + firstRoll + "</b>";
                   }
                   output = firstRoll + " : " + secondRoll;
+              } else {
+                totalAmount += firstRoll;
               }
 
               var line = document.createElement("p");
               line.className = "line";
               line.innerHTML = output;
               parentContainer.appendChild(line);
+        }
+        if (withAdvantage == false) {
+            var line = document.createElement("p");
+            line.className = "line";
+            line.innerHTML = "<b class='withMeaning'>TOTAL: " + totalAmount + "</b>";
+            parentContainer.appendChild(line);
         }
   }
 
