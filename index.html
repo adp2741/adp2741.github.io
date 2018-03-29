@@ -8,13 +8,19 @@
 
       body {
           font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+          width: 500px;
       }
 
-      .center {
-          margin-left: auto;
-          margin-right: auto;
+      /* .center {
           width: 90%;
           padding: 10px;
+          margin: 0 auto;
+      } */
+
+      .center {
+          position:relative;
+          left:20%; //Moves the element to the left by 50%
+          transform: translateX(-20%); //get half of the element's width and subtract that value with left's value
       }
 
       button {
