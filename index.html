@@ -5,23 +5,42 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>jQuery UI Spinner - Default functionality</title>
   <style>
-    .btn, .btn-type, .btn-roll, .btn-reset {
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    .center {
+        margin: auto;
+        width: 50%;
+        padding: 10px;
+    }
+
+    button {
       border: 0;
       outline: 0;
       display: inline-block;
       background-color: #ddd;
       border-radius: 3px;
-      padding: 10px 12px;
+      padding: 12px 12px;
     }
 
-    .btn.active, .btn-type.active {
-      background-color: #000;
-      color: #fff;
+    .btn {
+      width: 45px;
+      height: 45px;
+    }
+
+    .buttonLine {
+        padding: 3px 6px;
+    }
+
+    .btn.active, .btn-type.active, .btn-withAdvantage.active {
+        background-color: #000;
+        color: #fff;
     }
 
     .btn-roll:active, .btn-reset:active {
-      background-color: #000;
-      color: #fff;
+        background-color: #000;
+        color: #fff;
     }
   </style>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -39,35 +58,34 @@
   }
 
   function calculateAndPrintOut(numDie, dieType, withAdvantage, modifier) {
-      // Clean up old lines
-      var parentContainer = document.getElementById("output");
+        // Clean up old lines
+        var parentContainer = document.getElementById("output");
+        var elements = document.getElementById("output").getElementsByClassName("line");
 
-      var elements = document.getElementById("output").getElementsByClassName("line");
+        while (elements.length > 0) {
+            elements[0].parentNode.removeChild(elements[0]);
+        }
 
-      while (elements.length > 0) {
-          elements[0].parentNode.removeChild(elements[0]);
-      }
+        var totalAmount = 0
 
-      var totalAmount = 0
+        for (i = 0; i < numDie; i++) {
+            var firstRoll = getRandomInt(1, dieType) + modifier;
+            var output = firstRoll;
 
-      for (i = 0; i < numDie; i++) {
-          var currentRoll = getRandomInt(1, dieType);
-
-              // Take higher roll
               if (withAdvantage) {
-                  secondRoll = getRandomInt(1, dieType);
-                  if (secondRoll > currentRoll) {
-                    currentRoll = secondRoll;
+                  secondRoll = getRandomInt(1, dieType) + modifier;
+                  if (secondRoll > firstRoll) {
+                    secondRoll = "<b>" + secondRoll + "</b>";
+                  } else  {
+                    firstRoll = "<b>" + firstRoll + "</b>";
                   }
+                  output = firstRoll + " : " + secondRoll;
               }
 
-            // Add modifier
-            currentRoll += modifier
-
-            var line = document.createElement("p");
-            line.className = "line";
-            line.innerHTML = currentRoll;
-            parentContainer.appendChild(line);
+              var line = document.createElement("p");
+              line.className = "line";
+              line.innerHTML = output;
+              parentContainer.appendChild(line);
         }
   }
 
@@ -76,6 +94,16 @@
     var dieType = 4;
     var withAdvantage = false;
     var modifier = 0;
+
+    $('.btn-withAdvantage').on('click', function(e) {
+      withAdvantage = !withAdvantage
+      if (withAdvantage) {
+          $(this).addClass('active');
+      } else {
+          $(this).removeClass('active')
+      }
+      e.preventDefault();
+    });
 
     $('.btn').on('click', function(e) {
       $('.btn.active').removeClass('active');
@@ -100,6 +128,7 @@
     $('.btn-reset').on('click', function(e) {
       $('.btn.active').removeClass('active');
       $('.btn-type.active').removeClass('active');
+      $('.btn-withAdvantage.active').removeClass('active');
       $('.default').addClass('active');
       numDie = 1;
       dieType = 4;
@@ -114,32 +143,47 @@
   </script>
 </head>
 <body>
-  <h5>Number of Die</h5>
 
-  <button id="1" class="default btn active">1</button>
-  <button id="2" class="btn">2</button>
-  <button id="3" class="btn">3</button>
-  <button id="4" class="btn">4</button>
-  <button id="5" class="btn">5</button>
-  <button id="6" class="btn">6</button>
+  <div class="center">
+      <h5>Number of Die</h5>
 
-  <h5>Die Type</h5>
+      <div class="buttonLine">
+          <button id="1" class="default btn active">1</button>
+          <button id="2" class="btn">2</button>
+          <button id="3" class="btn">3</button>
+          <button id="4" class="btn">4</button>
+          <button id="5" class="btn">5</button>
+      </div>
+      <div class="buttonLine">
+          <button id="6" class="btn">6</button>
+          <button id="7" class="btn">7</button>
+          <button id="8" class="btn">8</button>
+          <button id="9" class="btn">9</button>
+          <button id="10" class="btn">10</button>
+      </div>
 
-  <button id="4" class="default btn-type active">D4</button>
-  <button id="6" class="btn-type">D6</button>
-  <button id="8" class="btn-type">D8</button>
-  <button id="10" class="btn-type">D10</button>
-  <button id="12" class="btn-type">D12</button>
-  <button id="20" class="btn-type">D20</button>
+      <h5>Die Type</h5>
 
-  <h5>Modifier: <input type="text" id="modifier" value="0"></h5>
+      <button id="4" class="default btn-type active">D4</button>
+      <button id="6" class="btn-type">D6</button>
+      <button id="8" class="btn-type">D8</button>
+      <button id="10" class="btn-type">D10</button>
+      <button id="12" class="btn-type">D12</button>
+      <button id="20" class="btn-type">D20</button>
+  </div>
 
-  <p>
-    <button id="getvalue" class="btn-roll">Roll</button>
-    <button class="btn-reset">Reset</button>
+  <p class="center">
+      <button class="btn-withAdvantage">Advantage</button>
   </p>
 
-  <div id="output">
+  <h5 class="center">Modifier: <input type="text" id="modifier" value="0"></h5>
+
+  <p class="center">
+      <button id="getvalue" class="btn-roll">Roll</button>
+      <button class="btn-reset">Reset</button>
+  </p>
+
+  <div id="output" class="center">
   </div>
 
 
