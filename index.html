@@ -11,6 +11,10 @@
           width: auto;
       }
 
+      h5 {
+        margin: 10px;;
+      }
+
       .center {
           position:relative;
           left:10%; //Moves the element to the left by 50%
@@ -45,10 +49,20 @@
           color: #fff;
       }
 
+      .btn-withAdvantage {
+        /* background-color: rgb(106, 90, 205); */
+      }
+
       .btn-roll {
-        width: 55px;
+        width: 80px;
         height: 55px;
         margin-right: 10px;
+        background-color: rgb(60, 179, 113);
+      }
+
+      .btn-reset {
+        width: 80px;
+        background-color: rgb(255, 99, 71)
       }
 
       .btn-roll:active, .btn-reset:active {
@@ -59,6 +73,23 @@
       .withMeaning {
           font-size: 125%;
       }
+
+      .vertpad {
+        height: 40px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+
+      .float1 {
+        float: left;
+      }
+
+      .float2 {
+        padding-left: 20px;
+        float: left;
+      }
+
+
 
   </style>
   <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -212,11 +243,12 @@
       <button id="20" class="btn-type">D20</button>
   </div>
 
-  <p class="center">
-      <button class="btn-withAdvantage">Advantage</button>
-  </p>
+  <div class="center vertpad">
+    <h5 class="float1">Modifier: <input type="text" id="modifier" value="0" style="width: 50px;"></h5>
+    <button class="float2 btn-withAdvantage">Advantage</button>
+  </div>
 
-  <h5 class="center">Modifier: <input type="text" id="modifier" value="0"></h5>
+
 
   <p class="center">
       <button id="getvalue" class="btn-roll">Roll</button>
