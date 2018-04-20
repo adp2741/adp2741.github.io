@@ -7,6 +7,7 @@
   <style>
 
       body {
+          max-width: 100%;
           font-family: -apple-system, BlinkMacSystemFont, sans-serif;
           width: auto;
       }
@@ -17,7 +18,7 @@
 
       .center {
           position:relative;
-          left:10%; //Moves the element to the left by 50%
+          left:5%; //Moves the element to the left by 50%
           transform: translateX(-10%); //get half of the element's width and subtract that value with left's value
       }
 
@@ -55,7 +56,6 @@
 
       .btn-roll {
         width: 80px;
-        height: 55px;
         margin-right: 10px;
         background-color: rgb(60, 179, 113);
       }
@@ -89,6 +89,11 @@
         float: left;
       }
 
+      .tab {
+       display:inline-block;
+       margin-left: 20px;
+     }
+
 
 
   </style>
@@ -116,7 +121,7 @@
         }
 
         var totalAmount = 0
-
+        var builtString = ""
         for (i = 0; i < numDie; i++) {
             var firstRoll = getRandomInt(1, dieType) + modifier;
             var output = firstRoll;
@@ -133,10 +138,18 @@
                 totalAmount += firstRoll;
               }
 
-              var line = document.createElement("p");
-              line.className = "line";
-              line.innerHTML = output;
-              parentContainer.appendChild(line);
+              builtString = builtString + output + '<span class="tab"></span>'
+
+              realDieNumber = i + 1
+              // Want to print 4 per line
+              if (realDieNumber == numDie || realDieNumber % 4 == 0) {
+                var line = document.createElement("p");
+                line.className = "line";
+                line.innerHTML = builtString;
+                parentContainer.appendChild(line);
+                builtString = ""
+              }
+
         }
         if (withAdvantage == false) {
             var line = document.createElement("p");
