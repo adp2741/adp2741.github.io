@@ -182,12 +182,12 @@
       e.preventDefault();
     });
 
-    $('.btn').on('click', function(e) {
-      $('.btn.active').removeClass('active');
-      $(this).addClass('active');
-      numDie = this.id
-      e.preventDefault();
-    });
+    // $('.btn').on('click', function(e) {
+    //   $('.btn.active').removeClass('active');
+    //   $(this).addClass('active');
+    //   numDie = this.id
+    //   e.preventDefault();
+    // });
 
     $('.btn-type').on('click', function(e) {
       $('.btn-type.active').removeClass('active');
@@ -197,6 +197,7 @@
     });
 
     $('.btn-roll').on('click', function(e) {
+      var numDie = parseInt(document.getElementById("numDie").value);
       var modifier = parseInt(document.getElementById("modifier").value);
       calculateAndPrintOut(numDie, dieType, withAdvantage, modifier)
       e.preventDefault();
@@ -222,9 +223,9 @@
 <body>
 
   <div class="center">
-      <h5>Number of Die</h5>
+      <!-- <h5>Number of Die</h5> -->
 
-      <div class="buttonLine">
+      <!-- <div class="buttonLine">
           <button id="1" class="default btn active">1</button>
           <button id="2" class="btn">2</button>
           <button id="3" class="btn">3</button>
@@ -271,6 +272,10 @@
       </div>
       <div class="buttonLine">
 
+      </div> -->
+
+      <div class="center vertpad">
+        <h5 class="float1">Number of Die <input type="number" id="numDie" onfocus="this.value=''" value="0" style="width: 50px;"></h5>
       </div>
 
       <h5>Die Type</h5>
